@@ -7,15 +7,29 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
+/**
+ * Renders the "Explore" tab screen with various collapsible sections
+ * showcasing different features and examples.
+ * @returns {JSX.Element} The explore screen component.
+ */
 export default function TabTwoScreen() {
   return (
+    // ParallaxScrollView provides a parallax effect for the header image
     <ParallaxScrollView
+      // Sets the background color of the header
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
+      // Sets the header image to an Ionicons icon
       headerImage={<Ionicons size={310} name="code-slash" style={styles.headerImage} />}>
+      
+      {/* Title container with themed view and text */}
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Explore</ThemedText>
       </ThemedView>
+      
+      {/* Description text */}
       <ThemedText>This app includes example code to help you get started.</ThemedText>
+      
+      {/* Collapsible section for file-based routing information */}
       <Collapsible title="File-based routing">
         <ThemedText>
           This app has two screens:{' '}
@@ -30,12 +44,16 @@ export default function TabTwoScreen() {
           <ThemedText type="link">Learn more</ThemedText>
         </ExternalLink>
       </Collapsible>
+      
+      {/* Collapsible section for platform support information */}
       <Collapsible title="Android, iOS, and web support">
         <ThemedText>
           You can open this project on Android, iOS, and the web. To open the web version, press{' '}
           <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
         </ThemedText>
       </Collapsible>
+      
+      {/* Collapsible section for image handling information */}
       <Collapsible title="Images">
         <ThemedText>
           For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
@@ -47,6 +65,8 @@ export default function TabTwoScreen() {
           <ThemedText type="link">Learn more</ThemedText>
         </ExternalLink>
       </Collapsible>
+      
+      {/* Collapsible section for custom fonts information */}
       <Collapsible title="Custom fonts">
         <ThemedText>
           Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
@@ -58,6 +78,8 @@ export default function TabTwoScreen() {
           <ThemedText type="link">Learn more</ThemedText>
         </ExternalLink>
       </Collapsible>
+      
+      {/* Collapsible section for light and dark mode components */}
       <Collapsible title="Light and dark mode components">
         <ThemedText>
           This template has light and dark mode support. The{' '}
@@ -68,6 +90,8 @@ export default function TabTwoScreen() {
           <ThemedText type="link">Learn more</ThemedText>
         </ExternalLink>
       </Collapsible>
+      
+      {/* Collapsible section for animations information */}
       <Collapsible title="Animations">
         <ThemedText>
           This template includes an example of an animated component. The{' '}
@@ -88,6 +112,7 @@ export default function TabTwoScreen() {
   );
 }
 
+// Styles for the explore screen components
 const styles = StyleSheet.create({
   headerImage: {
     color: '#808080',
