@@ -4,11 +4,15 @@ import { type PropsWithChildren } from 'react';
 /**
  * This file is web-only and used to configure the root HTML for every web page during static rendering.
  * The contents of this function only run in Node.js environments and do not have access to the DOM or browser APIs.
+ * 
+ * @param {PropsWithChildren} props - The props object containing children elements.
+ * @returns {JSX.Element} The root HTML structure for the web pages.
  */
 export default function Root({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <head>
+        {/* Meta tags for character set, compatibility, and viewport configuration */}
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -28,6 +32,7 @@ export default function Root({ children }: PropsWithChildren) {
   );
 }
 
+// CSS styles to set the background color based on the user's color scheme preference
 const responsiveBackground = `
 body {
   background-color: #fff;
