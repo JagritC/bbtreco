@@ -1,17 +1,52 @@
 import { View, Text, TextInput, Image, Touchable, TouchableOpacity, FlatList, ScrollView } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import * as Icon from "react-native-feather";
+import * as Location from "expo-location";
 import { themeColors } from "../theme";
 import Categories from "../components/categories";
 import { stores } from "../constants";
 
 export default function HomeScreen() {
+	const [location, setLocation] = useState(null);
+	const [errorMsg, setErrorMsg] = useState(null);
+	const [city, setCity] = useState(null);
+
+	useEffect(() => {
+		(async () => {
+			let { status } = await Location.requestForegroundPermissionsAsync();
+			if (status !== "granted") {
+				setErrorMsg("Permission to access location was denied");
+				return;
+			}
+
+			let location = await Location.getCurrentPositionAsync({});
+			setLocation(location);
+
+			let reverseGeocode = await Location.reverseGeocodeAsync({
+				latitude: location.coords.latitude,
+				longitude: location.coords.longitude,
+			});
+
+			if (reverseGeocode.length > 0) {
+				let place = reverseGeocode[0];
+				setCity(`${place.city}, ${place.region}`);
+			}
+		})();
+	}, []);
+
+	let locationText = "Waiting..";
+	if (errorMsg) {
+		locationText = errorMsg;
+	} else if (location) {
+		locationText = city;
+	}
+
 	return (
 		<View className="bg-white flex-1 relative">
 			<StatusBar />
-			<Image source={require("../assets/images/white-boba.png")} className="w-full absolute opacity-10" style={{ width: 500, height: 220 }} />
+			<Image source={require("../assets/images/white-boba.png")} className="w-full absolute opacity-10" style={{ width: 500, height: 210 }} />
 			<SafeAreaView className="flex-1 border ">
 				<View className="mt-5 mb-5 items-center flex-row px-4 justify-between">
 					{/*profile icon */}
@@ -25,7 +60,7 @@ export default function HomeScreen() {
 					<TouchableOpacity>
 						<View className="flex-row items-center space-x-2">
 							<Icon.MapPin height="20" width="20" color={themeColors.secondary(1)} />
-							<Text className="text-base bg-white font-semibold ">Waterloo, ON</Text>
+							<Text className="text-base font-semibold ">{locationText}</Text>
 						</View>
 					</TouchableOpacity>
 					{/*settings*/}
@@ -50,7 +85,7 @@ export default function HomeScreen() {
 					</TouchableOpacity>
 				</View>
 
-				<ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 20 }}>
+				<ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 20 }} className="overflow-hidden">
 					<View className="mt-4">
 						<ScrollView
 							horizontal
