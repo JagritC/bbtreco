@@ -46,8 +46,8 @@ export default function HomeScreen() {
 	return (
 		<View className="bg-white flex-1 relative">
 			<StatusBar />
-			<Image source={require("../assets/images/white-boba.png")} className="w-full absolute opacity-10" style={{ width: 500, height: 210 }} />
-			<SafeAreaView className="flex-1 border ">
+			<Image source={require("../assets/images/white-boba.png")} className="w-full absolute opacity-10" style={{ width: 500, height: 200 }} />
+			<SafeAreaView className="flex-1">
 				<View className="mt-5 mb-5 items-center flex-row px-4 justify-between">
 					{/*profile icon */}
 					<TouchableOpacity>
@@ -85,8 +85,8 @@ export default function HomeScreen() {
 					</TouchableOpacity>
 				</View>
 
-				<ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 20 }} className="overflow-hidden">
-					<View className="mt-4">
+				<ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 20 }} className="overflow-auto mt-1">
+					<View className="-mt-2 -ml-2">
 						<ScrollView
 							horizontal
 							showsHorizontalScrollIndicator={false}
