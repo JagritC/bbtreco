@@ -8,12 +8,14 @@ import { themeColors } from "../theme";
 import Categories from "../components/categories";
 import { stores } from "../constants";
 import { useNavigation } from "@react-navigation/native";
+//require("dotenv").config();
 
 export default function HomeScreen({ navigation, route }) {
 	const [location, setLocation] = useState(null);
 	const [errorMsg, setErrorMsg] = useState(null);
 	const [city, setCity] = useState(null);
 	const [userPreferences, setUserpreferences] = useState(null);
+	const [bobaStores, setBobaStores] = useState([]);
 
 	useEffect(() => {
 		(async () => {
@@ -35,6 +37,8 @@ export default function HomeScreen({ navigation, route }) {
 				let place = reverseGeocode[0];
 				setCity(`${place.city}, ${place.region}`);
 			}
+			fetchBobaStores(location.coords.latitude, location.coords.longitude);
+			console.log(bobaStores);
 		})();
 
 		if (route.params?.userPreferences) {
@@ -49,6 +53,12 @@ export default function HomeScreen({ navigation, route }) {
 	} else if (location) {
 		locationText = city;
 	}
+
+	const fetchBobaStores = async (lat, long) => {
+		// map the store names from stores into a list of store names
+		let storeNames = stores.map((store) => store.name);
+		setBobaStores(storeNames);
+	};
 
 	return (
 		<View className="bg-white flex-1 relative">
