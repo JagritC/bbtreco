@@ -1,0 +1,47 @@
+{
+    "user_preferences": [{
+        "user_id": 5,
+        "fruity_user": 1,
+        "milky_user": 0,
+        "with_tea_user": 1,
+        "refreshing_user": 1,
+        "fragrant_user": 0,
+        "adventurous_user": 1,
+        "cold_user": 1
+    }],
+    "available_bubble_teas": [
+        {
+            "drink_id": 200,
+            "fruity_drink": 1,
+            "milky_drink": 0,
+            "with_tea_drink": 1,
+            "refreshing_drink": 1,
+            "fragrant_drink": 0,
+            "cold_drink": 1,
+            "distance": 2.5,
+            "popularity": 85
+        },
+        {
+            "drink_id": 201,
+            "fruity_drink": 0,
+            "milky_drink": 1,
+            "with_tea_drink": 1,
+            "refreshing_drink": 0,
+            "fragrant_drink": 1,
+            "cold_drink": 1,
+            "distance": 3.0,
+            "popularity": 90
+        },
+        {
+            "drink_id": 202,
+            "fruity_drink": 1,
+            "milky_drink": 1,
+            "with_tea_drink": 0,
+            "refreshing_drink": 1,
+            "fragrant_drink": 0,
+            "cold_drink": 0,
+            "distance": 1.5,
+            "popularity": 75
+        }
+    ]
+}

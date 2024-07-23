@@ -1,0 +1,15 @@
+name: bobafy-deploy
+channels:
+  - defaults
+dependencies:
+  - python=3.8
+  - ipykernel
+  - numpy
+  - joblib
+  - pandas
+  - scikit-learn
+  - py-xgboost-cpu
+  - pip
+  - pip:
+    - azureml-inference-server-http
+prefix: C:\Users\User\anaconda3\envs\bobafy-deploy
