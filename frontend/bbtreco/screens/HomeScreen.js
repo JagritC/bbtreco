@@ -7,11 +7,15 @@ import * as Location from "expo-location";
 import { themeColors } from "../theme";
 import Categories from "../components/categories";
 import { stores } from "../constants";
+import { useNavigation } from "@react-navigation/native";
+//require("dotenv").config();
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation, route }) {
 	const [location, setLocation] = useState(null);
 	const [errorMsg, setErrorMsg] = useState(null);
 	const [city, setCity] = useState(null);
+	const [userPreferences, setUserpreferences] = useState(null);
+	const [bobaStores, setBobaStores] = useState([]);
 
 	useEffect(() => {
 		(async () => {
@@ -33,8 +37,15 @@ export default function HomeScreen() {
 				let place = reverseGeocode[0];
 				setCity(`${place.city}, ${place.region}`);
 			}
+			fetchBobaStores(location.coords.latitude, location.coords.longitude);
+			console.log(bobaStores);
 		})();
-	}, []);
+
+		if (route.params?.userPreferences) {
+			setUserpreferences(route.params.userPreferences);
+			console.log(route.params.userPreferences);
+		}
+	}, [route.params?.userPreferences]);
 
 	let locationText = "Waiting..";
 	if (errorMsg) {
@@ -43,9 +54,14 @@ export default function HomeScreen() {
 		locationText = city;
 	}
 
+	const fetchBobaStores = async (lat, long) => {
+		// map the store names from stores into a list of store names
+		let storeNames = stores.map((store) => store.name);
+		setBobaStores(storeNames);
+	};
+
 	return (
 		<View className="bg-white flex-1 relative">
-			<StatusBar />
 			<Image source={require("../assets/images/white-boba.png")} className="w-full absolute opacity-10" style={{ width: 500, height: 200 }} />
 			<SafeAreaView className="flex-1">
 				<View className="mt-5 mb-5 items-center flex-row px-4 justify-between">
@@ -84,8 +100,37 @@ export default function HomeScreen() {
 						</View>
 					</TouchableOpacity>
 				</View>
+				{/* Fill Questionnaire button */}
+				<View className="mt-9 flex-row items-center px-4">
+					<Image
+						source={require("../assets/images/white-boba.png")}
+						className="w-full absolute opacity-10"
+						style={{ width: 500, height: 100 }}
+					/>
+					<TouchableOpacity
+						className="bg-white p-2 flex-row items-center space-x-2 rounded-full border border-gray-300 w-full"
+						onPress={() => navigation.navigate("Questionnaire")}>
+						<Icon.Edit height="20" width="20" color={themeColors.primary(1)} />
+						<Text className="text-base font-semibold text-black">Fill Questionnaire</Text>
+					</TouchableOpacity>
+				</View>
 
-				<ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 20 }} className="overflow-auto mt-1">
+				{/*get Recommendation Button*/}
+				<View className="mt-5 flex-row items-center px-4">
+					<Image
+						source={require("../assets/images/white-boba.png")}
+						className="w-full absolute opacity-10"
+						style={{ width: 500, height: 50 }}
+					/>
+					<TouchableOpacity className="bg-white p-2 flex-row items-center space-x-2 rounded-full border border-gray-300 w-full">
+						<Icon.Star height="20" width="20" color={themeColors.primary(1)} />
+						<Text className="text-base font-semibold text-black">Get Recommendation</Text>
+					</TouchableOpacity>
+				</View>
+				<Image source={require("../assets/images/white-boba.png")} className="w-full opacity-10" style={{ width: 500, height: 200 }} />
+				<Image source={require("../assets/images/white-boba.png")} className="w-full opacity-10" style={{ width: 500, height: 200 }} />
+				<Image source={require("../assets/images/white-boba.png")} className="w-full opacity-10" style={{ width: 500, height: 200 }} />
+				{/* <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 20 }} className="overflow-auto mt-1">
 					<View className="-mt-2 -ml-2">
 						<ScrollView
 							horizontal
@@ -105,9 +150,8 @@ export default function HomeScreen() {
 							})}
 						</ScrollView>
 					</View>
-				</ScrollView>
+				</ScrollView> */}
 			</SafeAreaView>
-			{/*categories */}
 		</View>
 	);
 }
