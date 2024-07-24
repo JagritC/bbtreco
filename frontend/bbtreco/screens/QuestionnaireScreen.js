@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { themeColors } from "../theme";
 import { StatusBar } from "expo-status-bar";
 import Slider from "@react-native-community/slider";
+import * as Icon from "react-native-feather";
 
 export default function QuestionnaireScreen({ navigation }) {
 	const [userPreferences, setUserpreferences] = useState({
@@ -44,8 +45,8 @@ export default function QuestionnaireScreen({ navigation }) {
 					<Text className="text-dark text-center text-lg font-bold">Questionnaire</Text>
 				</View>
 				{/* back button */}
-				<TouchableOpacity onPress={() => navigation.goBack()} className="absolute top-4 left-4 mt-0.5">
-					<Text className="text-dark text-base font-bold">Back</Text>
+				<TouchableOpacity onPress={() => navigation.goBack()} className="absolute top-3.5 left-4 mt-0.5">
+					<Icon.ArrowLeft color={themeColors.dark(1)} height="30" width="30" />
 				</TouchableOpacity>
 			</View>
 
