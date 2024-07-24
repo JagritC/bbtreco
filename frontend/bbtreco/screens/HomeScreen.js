@@ -101,7 +101,7 @@ export default function HomeScreen({ navigation, route }) {
 					</TouchableOpacity>
 				</View>
 				{/* Fill Questionnaire button */}
-				<View className="mt-9 flex-row items-center px-4">
+				<View className="mt-8 flex-row items-center px-4">
 					<Image
 						source={require("../assets/images/white-boba.png")}
 						className="w-full absolute opacity-10"
@@ -122,7 +122,13 @@ export default function HomeScreen({ navigation, route }) {
 						className="w-full absolute opacity-10"
 						style={{ width: 500, height: 50 }}
 					/>
-					<TouchableOpacity className="bg-white p-2 flex-row items-center space-x-2 rounded-full border border-gray-300 w-full">
+					<TouchableOpacity
+						className="bg-white p-2 flex-row items-center space-x-2 rounded-full border border-gray-300 w-full"
+						onPress={() =>
+							navigation.navigate("GetRecommendation", {
+								userPreferences: userPreferences,
+							})
+						}>
 						<Icon.Star height="20" width="20" color={themeColors.primary(1)} />
 						<Text className="text-base font-semibold text-black">Get Recommendation</Text>
 					</TouchableOpacity>
