@@ -38,7 +38,7 @@ export default function HomeScreen({ navigation, route }) {
 				setCity(`${place.city}, ${place.region}`);
 			}
 			fetchBobaStores(location.coords.latitude, location.coords.longitude);
-			console.log(bobaStores);
+			//console.log(bobaStores);
 		})();
 
 		if (route.params?.userPreferences) {

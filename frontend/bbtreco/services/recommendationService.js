@@ -28,7 +28,7 @@ const transformData = (data) => {
 	}));
 };
 
-const transformData = transformData(parsedData);
+const transformedData = transformData(parsedData);
 
 export const getRecommendation = async (userPreferences) => {
 	try {

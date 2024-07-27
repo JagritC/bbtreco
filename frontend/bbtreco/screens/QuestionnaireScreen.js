@@ -8,12 +8,14 @@ import * as Icon from "react-native-feather";
 
 export default function QuestionnaireScreen({ navigation }) {
 	const [userPreferences, setUserpreferences] = useState({
+		userId: 0,
 		milky: true,
 		fruity: false,
 		withTea: false,
 		distance: 0,
 		refreshing: false,
 		fragrant: false,
+		adventurous: false,
 		cold: false,
 		// Add other fields as necessary
 	});
@@ -127,6 +129,11 @@ export default function QuestionnaireScreen({ navigation }) {
 						className={`p-3 bg-gray-200 rounded mb-3 ${userPreferences.cold ? "bg-primary" : "bg-gray-200"}`}
 						onPress={() => handleToggle("cold")}>
 						<Text className="text-base">Cold</Text>
+					</TouchableOpacity>
+					<TouchableOpacity
+						className={`p-3 bg-gray-200 rounded mb-3 ${userPreferences.adventurous ? "bg-primary" : "bg-gray-200"}`}
+						onPress={() => handleToggle("adventurous")}>
+						<Text className="text-base">Adventurous</Text>
 					</TouchableOpacity>
 				</View>
 
